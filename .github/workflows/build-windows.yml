@@ -48,6 +48,7 @@ jobs:
           haxelib install hxCodec 3.0.2
           haxelib install SScript 8.1.6
           haxelib install tjson 1.4.0
+          haxelib install compiletime
           haxelib install hxcpp-debug-server
           haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit master
