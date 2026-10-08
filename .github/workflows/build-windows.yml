@@ -51,7 +51,7 @@ jobs:
           haxelib install tjson 1.4.0
           haxelib install compiletime
           haxelib install hxcpp-debug-server
-                    haxelib install SScript 8.1.6
+          haxelib install SScript 8.1.6
           haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit master
           haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc 7cf5e544956c21a685c9a6ba0faa10956a789fff
@@ -148,7 +148,7 @@ jobs:
       - name: Restore existing build cache for faster compilation
         uses: actions/cache@v4.2.3
         with:
-          key: cache-build-windows-v2-debug-v2
+          key: cache-build-windows-debug-v2
           path: |
             .haxelib/
             .hxcpp_cache/
@@ -159,6 +159,7 @@ jobs:
         shell: cmd
         run: |
           haxelib setup .haxelib
+          if exist .haxelib\SScript rmdir /s /q .haxelib\SScript
           haxelib install lime 8.3.2
           haxelib install openfl 9.5.2
           haxelib install flixel 5.5.0
@@ -168,7 +169,7 @@ jobs:
           haxelib install hxcpp 4.3.2
           haxelib install hxCodec 3.0.2
           haxelib install hxvlc
-                    haxelib install SScript 8.1.6
+          haxelib install SScript 8.1.6
           haxelib install tjson 1.4.0
           haxelib install compiletime
           haxelib install hxcpp-debug-server
@@ -221,7 +222,7 @@ jobs:
               repo: context.repo.repo,
             })
             for (const cache of caches.data.actions_caches) {
-              if (cache.key == "cache-build-windows-v2-debug-v2") {
+              if (cache.key == "cache-build-windows-debug-v2") {
                 console.log("Clearing " + cache.key + "...")
                 await github.rest/actions.deleteActionsCacheById({
                   owner: context.repo.owner,
@@ -235,7 +236,7 @@ jobs:
       - name: Uploading new cache
         uses: actions/cache@v4.2.3
         with:
-          key: cache-build-windows-v2-debug-v2
+          key: cache-build-windows-debug-v2
           path: |
             .haxelib/
             .hxcpp_cache/
