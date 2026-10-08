@@ -27,7 +27,7 @@ jobs:
       - name: Restore existing build cache for faster compilation
         uses: actions/cache@v4.2.3
         with:
-          key: cache-build-windows
+          key: cache-build-windows-v2
           path: |
             .haxelib/
             .hxcpp_cache/
@@ -51,10 +51,10 @@ jobs:
           haxelib install tjson 1.4.0
           haxelib install compiletime
           haxelib install hxcpp-debug-server
-                    haxelib install SScript 7.7.0
+                    haxelib install SScript 8.1.6
           haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit master
-          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc main
+          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc 7cf5e544956c21a685c9a6ba0faa10956a789fff
           haxelib set lime 8.3.2
           haxelib set openfl 9.5.2
           haxelib set flixel 5.5.0
@@ -63,7 +63,7 @@ jobs:
           haxelib set flixel-ui 2.6.1
           haxelib set hxcpp 4.3.2
           haxelib set hxCodec 3.0.2
-          haxelib set SScript 7.7.0
+          haxelib set SScript 8.1.6
           haxelib set tjson 1.4.0
 
       - name: Verifying libraries
@@ -75,15 +75,10 @@ jobs:
           haxelib path flixel-addons
           haxelib path flixel-ui
           haxelib path SScript
+          haxelib path hxdiscord_rpc
           haxelib path hxCodec
           haxelib path hxvlc
           haxelib path compiletime
-
-      - name: Skip SScript setup mode
-        shell: cmd
-        run: |
-          echo oy9:showMacroty8:loopCosti25y10:includeAllfg > %USERPROFILE%\settings.cocoa
-          type %USERPROFILE%\settings.cocoa
 
       - name: Building the game
         shell: cmd
@@ -113,7 +108,7 @@ jobs:
               repo: context.repo.repo,
             })
             for (const cache of caches.data.actions_caches) {
-              if (cache.key == "cache-build-windows") {
+              if (cache.key == "cache-build-windows-v2") {
                 console.log("Clearing " + cache.key + "...")
                 await github.rest.actions.deleteActionsCacheById({
                   owner: context.repo.owner,
@@ -127,7 +122,7 @@ jobs:
       - name: Uploading new cache
         uses: actions/cache@v4.2.3
         with:
-          key: cache-build-windows
+          key: cache-build-windows-v2
           path: |
             .haxelib/
             .hxcpp_cache/
@@ -153,7 +148,7 @@ jobs:
       - name: Restore existing build cache for faster compilation
         uses: actions/cache@v4.2.3
         with:
-          key: cache-build-windows-debug
+          key: cache-build-windows-v2-debug-v2
           path: |
             .haxelib/
             .hxcpp_cache/
@@ -173,13 +168,13 @@ jobs:
           haxelib install hxcpp 4.3.2
           haxelib install hxCodec 3.0.2
           haxelib install hxvlc
-                    haxelib install SScript 7.7.0
+                    haxelib install SScript 8.1.6
           haxelib install tjson 1.4.0
           haxelib install compiletime
           haxelib install hxcpp-debug-server
           haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit master
-          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc main
+          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc 7cf5e544956c21a685c9a6ba0faa10956a789fff
           haxelib set lime 8.3.2
           haxelib set openfl 9.5.2
           haxelib set flixel 5.5.0
@@ -188,7 +183,7 @@ jobs:
           haxelib set flixel-ui 2.6.1
           haxelib set hxcpp 4.3.2
           haxelib set hxCodec 3.0.2
-          haxelib set SScript 7.7.0
+          haxelib set SScript 8.1.6
           haxelib set tjson 1.4.0
 
       - name: Verifying libraries
@@ -200,15 +195,10 @@ jobs:
           haxelib path flixel-addons
           haxelib path flixel-ui
           haxelib path SScript
+          haxelib path hxdiscord_rpc
           haxelib path hxCodec
           haxelib path hxvlc
           haxelib path compiletime
-
-      - name: Skip SScript setup mode
-        shell: cmd
-        run: |
-          echo oy9:showMacroty8:loopCosti25y10:includeAllfg > %USERPROFILE%\settings.cocoa
-          type %USERPROFILE%\settings.cocoa
 
       - name: Building the game
         shell: cmd
@@ -231,7 +221,7 @@ jobs:
               repo: context.repo.repo,
             })
             for (const cache of caches.data.actions_caches) {
-              if (cache.key == "cache-build-windows-debug") {
+              if (cache.key == "cache-build-windows-v2-debug-v2") {
                 console.log("Clearing " + cache.key + "...")
                 await github.rest/actions.deleteActionsCacheById({
                   owner: context.repo.owner,
@@ -245,7 +235,7 @@ jobs:
       - name: Uploading new cache
         uses: actions/cache@v4.2.3
         with:
-          key: cache-build-windows-debug
+          key: cache-build-windows-v2-debug-v2
           path: |
             .haxelib/
             .hxcpp_cache/
