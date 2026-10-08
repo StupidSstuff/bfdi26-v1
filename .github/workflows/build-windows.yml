@@ -27,30 +27,47 @@ jobs:
           New-Item -ItemType Directory -Force -Path $libPath | Out-Null
           haxelib setup "$libPath"
 
-      - name: Install pinned dependencies
+      - name: Install dependencies
         shell: cmd
         run: |
-          haxelib install lime
-          haxelib install openfl
+          haxelib install lime 8.3.2
+          haxelib install openfl 9.5.2
           haxelib install flixel 5.5.0
           haxelib install flixel-addons 3.2.2
           haxelib install flixel-ui 2.6.1
-          haxelib install flixel-tools
+          haxelib install flixel-tools 1.5.1
           haxelib install SScript 8.1.6
-          haxelib install hxCodec
-          haxelib install tjson
+          haxelib install hxCodec 3.0.2
+          haxelib install tjson 1.4.0
           haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit
           haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
 
-      - name: Verify required versions
+      - name: Select required library versions
         shell: cmd
         run: |
+          haxelib set lime 8.3.2
+          haxelib set openfl 9.5.2
+          haxelib set flixel 5.5.0
+          haxelib set flixel-addons 3.2.2
+          haxelib set flixel-ui 2.6.1
+          haxelib set flixel-tools 1.5.1
+          haxelib set SScript 8.1.6
+          haxelib set hxCodec 3.0.2
+          haxelib set tjson 1.4.0
+
+      - name: Verify installed libraries
+        shell: cmd
+        run: |
+          haxe -version
           haxelib list
-          haxelib path flixel 5.5.0
-          haxelib path flixel-addons 3.2.2
-          haxelib path flixel-ui 2.6.1
-          haxelib path SScript 8.1.6
+          haxelib path lime
+          haxelib path openfl
+          haxelib path flixel
+          haxelib path flixel-addons
+          haxelib path flixel-ui
+          haxelib path SScript
+          haxelib path hxCodec
 
       - name: Setup Lime
         shell: cmd
