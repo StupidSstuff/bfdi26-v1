@@ -1,0 +1,54 @@
+name: Build BFDI26 (Windows)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Haxe 4.3.7
+        uses: krdlab/setup-haxe@v2
+        with:
+          haxe-version: 4.3.7
+
+      - name: Show tool versions
+        shell: pwsh
+        run: |
+          haxe -version
+          haxelib version
+          git --version
+
+      - name: Setup Haxelib
+        shell: pwsh
+        run: |
+          $libPath = "$env:USERPROFILE\haxelib"
+          New-Item -ItemType Directory -Force -Path $libPath | Out-Null
+          haxelib setup "$libPath"
+
+      - name: Install project dependencies
+        shell: cmd
+        run: setup\setup-windows.bat
+
+      - name: Setup Lime
+        shell: cmd
+        run: haxelib run lime setup
+
+      - name: Build Windows release
+        shell: cmd
+        run: lime build windows -release
+
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v4
+        with:
+          name: BFDI26-Windows
+          path: export/release/windows
+          if-no-files-found: error
