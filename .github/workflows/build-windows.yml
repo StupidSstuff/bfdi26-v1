@@ -46,6 +46,7 @@ jobs:
           haxelib install flixel-ui 2.6.1
           haxelib install hxcpp 4.3.2
           haxelib install hxCodec 3.0.2
+          haxelib install hxvlc
           haxelib install SScript 8.1.6
           haxelib install tjson 1.4.0
           haxelib install compiletime
@@ -74,6 +75,7 @@ jobs:
           haxelib path flixel-ui
           haxelib path SScript
           haxelib path hxCodec
+          haxelib path hxvlc
 
       - name: Building the game
         shell: cmd
