@@ -38,6 +38,7 @@ jobs:
         shell: cmd
         run: |
           haxelib setup .haxelib
+          if exist .haxelib\SScript rmdir /s /q .haxelib\SScript
           haxelib install lime 8.3.2
           haxelib install openfl 9.5.2
           haxelib install flixel 5.5.0
