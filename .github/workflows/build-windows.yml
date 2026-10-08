@@ -50,10 +50,7 @@ jobs:
           haxelib install tjson 1.4.0
           haxelib install compiletime
           haxelib install hxcpp-debug-server
-          haxelib remove SScript 8.1.6 >nul 2>&1
-          curl.exe -L --fail --retry 3 -o SScript-8.1.6.zip https://github.com/NovaFlare-Engine-haxelib/SScript-8.1.6/archive/refs/heads/main.zip
-          haxelib install SScript-8.1.6.zip
-          del /q SScript-8.1.6.zip
+                    haxelib install SScript 7.7.0
           haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit master
           haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc main
@@ -65,7 +62,7 @@ jobs:
           haxelib set flixel-ui 2.6.1
           haxelib set hxcpp 4.3.2
           haxelib set hxCodec 3.0.2
-          haxelib set SScript 8.1.6
+          haxelib set SScript 7.7.0
           haxelib set tjson 1.4.0
 
       - name: Verifying libraries
@@ -169,13 +166,7 @@ jobs:
           haxelib install hxcpp 4.3.2
           haxelib install hxCodec 3.0.2
           haxelib install hxvlc
-          haxelib install SScript-8.1.6.zip 2>nul
-          if errorlevel 1 (
-            haxelib remove SScript 8.1.6 >nul 2>&1
-            curl.exe -L --fail --retry 3 -o SScript-8.1.6.zip https://github.com/NovaFlare-Engine-haxelib/SScript-8.1.6/archive/refs/heads/main.zip
-            haxelib install SScript-8.1.6.zip
-            del /q SScript-8.1.6.zip
-          )
+                    haxelib install SScript 7.7.0
           haxelib install tjson 1.4.0
           haxelib install compiletime
           haxelib install hxcpp-debug-server
@@ -190,7 +181,7 @@ jobs:
           haxelib set flixel-ui 2.6.1
           haxelib set hxcpp 4.3.2
           haxelib set hxCodec 3.0.2
-          haxelib set SScript 8.1.6
+          haxelib set SScript 7.7.0
           haxelib set tjson 1.4.0
 
       - name: Verifying libraries
