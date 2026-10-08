@@ -15,17 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Haxe 4.3.7
+      - name: Install Haxe
         uses: krdlab/setup-haxe@v2
         with:
           haxe-version: 4.3.7
-
-      - name: Show tool versions
-        shell: pwsh
-        run: |
-          haxe -version
-          haxelib version
-          git --version
 
       - name: Setup Haxelib
         shell: pwsh
@@ -34,9 +27,30 @@ jobs:
           New-Item -ItemType Directory -Force -Path $libPath | Out-Null
           haxelib setup "$libPath"
 
-      - name: Install project dependencies
+      - name: Install pinned dependencies
         shell: cmd
-        run: setup\setup-windows.bat
+        run: |
+          haxelib install lime
+          haxelib install openfl
+          haxelib install flixel 5.5.0
+          haxelib install flixel-addons 3.2.2
+          haxelib install flixel-ui 2.6.1
+          haxelib install flixel-tools
+          haxelib install SScript 8.1.6
+          haxelib install hxCodec
+          haxelib install tjson
+          haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
+          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit
+          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
+
+      - name: Verify required versions
+        shell: cmd
+        run: |
+          haxelib list
+          haxelib path flixel 5.5.0
+          haxelib path flixel-addons 3.2.2
+          haxelib path flixel-ui 2.6.1
+          haxelib path SScript 8.1.6
 
       - name: Setup Lime
         shell: cmd
@@ -44,7 +58,7 @@ jobs:
 
       - name: Build Windows release
         shell: cmd
-        run: haxelib run lime build windows -release
+        run: lime build windows -release
 
       - name: Upload Windows build
         uses: actions/upload-artifact@v4
