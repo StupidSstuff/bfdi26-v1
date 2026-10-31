@@ -83,7 +83,7 @@ jobs:
       - name: Building the game
         shell: cmd
         run: |
-          haxelib run lime build windows -release -DCOMPILE_EXPERIMENTAL
+          echo N| haxelib run lime build windows -release -DCOMPILE_EXPERIMENTAL
 
       - name: Uploading artifact (executable)
         uses: actions/upload-artifact@v4
@@ -204,7 +204,7 @@ jobs:
       - name: Building the game
         shell: cmd
         run: |
-          haxelib run lime build windows -debug -DCOMPILE_EXPERIMENTAL
+          echo N| haxelib run lime build windows -debug -DCOMPILE_EXPERIMENTAL
 
       - name: Uploading artifact (entire build)
         uses: actions/upload-artifact@v4
