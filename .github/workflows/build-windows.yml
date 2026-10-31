@@ -80,10 +80,24 @@ jobs:
           haxelib path hxvlc
           haxelib path compiletime
 
+      - name: Initialize SScript settings
+        shell: cmd
+        continue-on-error: true
+        run: |
+          if not exist "%USERPROFILE%\settings.cocoa" echo N| haxelib run lime build windows -release -DCOMPILE_EXPERIMENTAL
+
+      - name: Verify SScript settings
+        shell: cmd
+        run: |
+          if not exist "%USERPROFILE%\settings.cocoa" (
+            echo SScript did not create settings.cocoa.
+            exit /b 1
+          )
+
       - name: Building the game
         shell: cmd
         run: |
-          echo N| haxelib run lime build windows -release -DCOMPILE_EXPERIMENTAL
+          haxelib run lime build windows -release -DCOMPILE_EXPERIMENTAL
 
       - name: Uploading artifact (executable)
         uses: actions/upload-artifact@v4
@@ -201,10 +215,24 @@ jobs:
           haxelib path hxvlc
           haxelib path compiletime
 
+      - name: Initialize SScript settings
+        shell: cmd
+        continue-on-error: true
+        run: |
+          if not exist "%USERPROFILE%\settings.cocoa" echo N| haxelib run lime build windows -debug -DCOMPILE_EXPERIMENTAL
+
+      - name: Verify SScript settings
+        shell: cmd
+        run: |
+          if not exist "%USERPROFILE%\settings.cocoa" (
+            echo SScript did not create settings.cocoa.
+            exit /b 1
+          )
+
       - name: Building the game
         shell: cmd
         run: |
-          echo N| haxelib run lime build windows -debug -DCOMPILE_EXPERIMENTAL
+          haxelib run lime build windows -debug -DCOMPILE_EXPERIMENTAL
 
       - name: Uploading artifact (entire build)
         uses: actions/upload-artifact@v4
